@@ -1,0 +1,20 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"  ></script>
+<img id="cap_image"  />
+<br />
+<input id="cap_value" /> <button type="button" onclick="check_capcha()" >Check</button>
+<script>
+    (function(){
+
+        axios.get("/capcha").then(response=>{
+            document.getElementById("cap_image").src=response.data.cap_image;
+        });
+
+    })();
+
+    function check_capcha()
+    {
+        axios.post("/check_capcha",{cap_value:document.getElementById("cap_value").value}).then(response=>{
+            alert(response.data);
+        });
+    }
+</script>
